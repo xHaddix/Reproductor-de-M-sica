@@ -1,21 +1,24 @@
-# Funciones para controlar la música
 import pygame
 from tkinter import filedialog
-class backend(): 
 
-    def load_music():
+class MusicPlayer:
+    def __init__(self, label):
+        pygame.mixer.init()
+        self.music_label = label
+
+    def load_music(self):
         file = filedialog.askopenfilename(filetypes=[("MP3 files", "*.mp3")])
         if file:
             pygame.mixer.music.load(file)
             pygame.mixer.music.play()
-            music_label.config(text="Reproduciendo: " + file.split("/")[-1])
+            self.music_label.config(text="Reproduciendo: " + file.split("/")[-1])
 
-    def play_music():
+    def play_music(self):
         pygame.mixer.music.unpause()
 
-    def pause_music():
+    def pause_music(self):
         pygame.mixer.music.pause()
 
-    def stop_music():
+    def stop_music(self):
         pygame.mixer.music.stop()
-        music_label.config(text="")
+        self.music_label.config(text="")
